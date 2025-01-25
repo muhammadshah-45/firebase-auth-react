@@ -1,6 +1,6 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword ,signInWithPopup } from 'firebase/auth'
 import React, { useState } from 'react'
-import { auth } from '../../firebase.config'
+import { auth, signInWithGoogle } from '../../firebas.config'
 import { useNavigate } from 'react-router-dom'
 
 export const Home = () => {
@@ -51,9 +51,21 @@ export const Home = () => {
             setError(errorMessage)
         })
     }
+    const provider =new GoogleAuthProvider()
+     
+     const handleSignInwithGoogle = async(e) => {  
+        e.preventDefault()
+        try {  
+          await   signInWithPopup(auth, provider);  
+            navigate('/private');  
+        } catch (error) {  
+            const errorMessage = error.message;  
+            setError(errorMessage); 
+        }  
+    }; 
   return (
-    <div className='flex justify-center flex-col h-screen bg-red-400 items-center mx-auto w-full'>
-        <form className='w-[46%] h-[300px] flex gap-1 flex-col p-8 bg-white rounded-md shadow-md justify-center items-center'>
+    <div className='flex justify-center flex-col h-screen p-8 bg-red-400 items-center mx-auto w-full'>
+        <form className='w-[46%] h-[300px] flex gap-1 flex-col p-8 bg-white rounded-md shadow-md justify-center items-center '>
             {isSignInActive ? (<span className='mb-3 font-semibold'>SignIn</span>): ( <span className='mb-3 font-semibold font-serif'>Sign Up</span> )}
             <label htmlFor="email" className='font-medium w-full'>Email</label>
             <input type="email" name="" placeholder='example@gmail.com' onChange={handleChangeEmail} className='border w-full rounded-md p-1 outline-none' id="email" />
@@ -67,6 +79,8 @@ export const Home = () => {
                     {isSignInActive ? "SignUp" : "SignIn"}
                 </span>
             </p>
+            <button className='bg-blue-400 text-white px-3 py-1 rounded-md' onClick={handleSignInwithGoogle}>Sign with Google</button>
+            {/* <button onClick={signInWithGoogle}>Google</button> */}
         </form>
 
     </div>

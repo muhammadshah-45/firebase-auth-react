@@ -1,6 +1,6 @@
 import { signOut } from 'firebase/auth'
 import React from 'react'
-import { auth } from '../../firebase.config'
+import { auth } from '../../firebas.config'
 
 export const Private = () => {
   const handleSignOut =()=>{

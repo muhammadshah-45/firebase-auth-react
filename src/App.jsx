@@ -4,9 +4,9 @@ import './index.css'
 import { Private } from "./pages/Private"
 import { useEffect, useState } from "react"
 import { onAuthStateChanged } from "firebase/auth"
-import { auth } from "../firebase.config"
+import { auth } from "../firebas.config"
 import { ProtectedRoutes } from "./components/ProtectedRoutes"
-import { Memoization, ParentComponent } from "./pages/Memoization"
+
 function App() {
  const [user,setUser] = useState(null)
  
@@ -21,14 +21,14 @@ function App() {
     <>
      <Router>
       <Routes>
-       {/* <Route path="/" element = {<Home />} />
+       <Route path="/" element = {<Home />} />
        <Route path="/private" element = { 
         <ProtectedRoutes user = {user}>
         <Private />
         </ProtectedRoutes>
-        } /> */}
-       <Route path="/memo" element={<Memoization />}/>
-       <Route path="/memo" element = {<ParentComponent />}/>
+        } />
+         
+      
       </Routes>
       </Router> 
     </>
